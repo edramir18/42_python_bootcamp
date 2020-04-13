@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 import sys
+import re
 
 
 def print_usage():
@@ -10,13 +11,14 @@ def print_usage():
 
 
 def main():
+    number = r'^-?[0-9]+$'
     argn = len(sys.argv)
     if argn < 3:
         print_usage()
     elif argn > 3:
         print("InputError: too many arguments")
         print_usage()
-    elif not (sys.argv[1].isnumeric() and sys.argv[2].isnumeric()):
+    elif re.search(number, sys.argv[1]) is None or re.search(number, sys.argv[2]) is None:
         print("InputError: only numbers")
         print_usage()
     else:

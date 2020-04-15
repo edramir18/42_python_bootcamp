@@ -7,6 +7,9 @@ def test_good_csv():
     with CsvReader('../resources/good.csv') as file:
         data = file.getdata()
         header = file.getheader()
+        print(header)
+        for d in data:
+            print(d)
 
 
 def test_bad_csv():

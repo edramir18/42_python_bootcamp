@@ -1,6 +1,7 @@
 *.log
 *.pyc
 *.zip
+env/
 venv/
 __pycache__/
 .idea/

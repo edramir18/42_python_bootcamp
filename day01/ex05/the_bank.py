@@ -28,20 +28,35 @@ class Bank(object):
         :param dest: int(id) or str(name) of the destination account
         :param amount: float(amount) amount to transfer
         """
+        origin = self.find_account(origin)
+        dest = self.find_account(dest)
+        if origin is None or dest is None:
+            return False
         pass
+
+    def find_account(self, value):
+        key = None
+        if isinstance(value, str):
+            key = 'name'
+        elif isinstance(value, int):
+            key = 'id'
+        if key is None:
+            return None
+        for x in self.account:
+            if x[key] == value:
+                return x
+        return None
 
     def fix_account(self, account):
         pass
 
+    @staticmethod
     def check_account(account):
         keys = account.keys()
         if len(keys) % 2 == 0:
             return False
-        if 'name' not in keys or 'id' not in keys or 'value' not in keys:
+        if any([x not in keys1 for x in ['name', 'id', 'value', 'zip', 'addr']]):
             return False
-        if 'zip' not in keys or 'addr' not in keys:
+        if any([str(x).startswith('b') for x in keys]):
             return False
-        for x in keys:
-            if str(x).startswith('b'):
-                return False
         return True
